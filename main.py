@@ -25,7 +25,7 @@ class Program(App):
         self.wid3_from = Spinner(text='Choose', values=number_system, font_size=110, background_color=GREEN, color=RED, background_normal='')
         self.wid3_input = MyBODHText(font_size=100, background_color=YELLOW, size_hint=(3.9, 1), trans=self.appTransform)
 
-        self.sm = ScreenManager()  # Creating ScreenManager
+        self.screen_manager = ScreenManager()  # Creating ScreenManager
 
     def build(self):
         # Window Settings
@@ -34,10 +34,10 @@ class Program(App):
         self.icon = icon
 
         # xScreens
-        sc1 = Screen(name='project')
-        sc2 = Screen(name='info')
-        sc3 = Screen(name='numsys')
-        sc4 = Screen(name='info2')
+        project_screen = Screen(name='project')
+        info_screen = Screen(name='info')
+        number_system_screen = Screen(name='numsys')
+        info2_screen = Screen(name='info2')
 
         # Screen 1
         box = BoxLayout(orientation='vertical')
@@ -104,30 +104,30 @@ class Program(App):
         xbox.add_widget(wid4_infotext2)
 
         # Add Screens To ScreenManager
-        sc1.add_widget(box)
-        sc2.add_widget(ibox)
-        sc3.add_widget(jbox)
-        sc4.add_widget(xbox)
+        project_screen.add_widget(box)
+        info_screen.add_widget(ibox)
+        number_system_screen.add_widget(jbox)
+        info2_screen.add_widget(xbox)
 
-        self.sm.add_widget(sc1)
-        self.sm.add_widget(sc2)
-        self.sm.add_widget(sc3)
-        self.sm.add_widget(sc4)
+        self.screen_manager.add_widget(project_screen)
+        self.screen_manager.add_widget(info_screen)
+        self.screen_manager.add_widget(number_system_screen)
+        self.screen_manager.add_widget(info2_screen)
 
-        return self.sm
+        return self.screen_manager
 
     # Switch Screens
     def go_to_info(self, *event):
-        self.sm.current = 'info'
+        self.screen_manager.current = 'info'
 
     def go_to_info2(self, *event):
-        self.sm.current = 'info2'
+        self.screen_manager.current = 'info2'
 
     def go_to_project(self, *event):
-        self.sm.current = 'project'
+        self.screen_manager.current = 'project'
 
     def go_to_NumSys(self, *event):
-        self.sm.current = 'numsys'
+        self.screen_manager.current = 'numsys'
 
     # Transforming Memory Unit System
     def transforming(self, *event):
@@ -135,6 +135,7 @@ class Program(App):
         spin_to = self.wid_to
         label = self.wid_text
         __input__ = self.wid_input
+
         try:
             number = float(__input__.text)
             if spin_from.text == 'Choose' or spin_to.text == 'Choose':
@@ -150,6 +151,7 @@ class Program(App):
         spin_to = self.wid3_to
         label = self.wid3_label
         __input__ = self.wid3_input
+
         try:
             number = __input__.text
             if spin_from.text == 'Choose' or spin_to.text == 'Choose':
